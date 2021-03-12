@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  template: ``,
+  styles: [``]
 })
-export class AppComponent {
+export class AppRootComponent {
   title = 'component-local-state-poc';
 }
