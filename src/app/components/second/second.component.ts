@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { getStore } from 'src/app/state/component-local-state';
+import { getTempState } from 'src/app/state/temp-state';
 import { GlobalQuery } from 'src/app/state/global/global.query';
 import { GlobalService } from 'src/app/state/global/global.service';
 
@@ -13,12 +13,12 @@ import { GlobalService } from 'src/app/state/global/global.service';
     </div>
     <div class="align-items-md-center d-flex my-1">
       <button type="button" class="btn btn-outline-secondary btn-sm mx-2" (click)="increment()">++</button>
-      local counter: {{ localStore.query.get$('counter') | async }}
+      local counter: {{ localStore.get$('counter') | async }}
     </div>`,
   styles: [],
 })
 export class SecondComponent {
-  readonly localStore = getStore('second', { counter: 0 });
+  readonly localStore = getTempState('second', { counter: 0 });
 
   constructor(public readonly globalService: GlobalService, public readonly globalQuery: GlobalQuery) {}
 
