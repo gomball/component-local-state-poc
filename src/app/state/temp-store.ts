@@ -2,10 +2,9 @@ import { Query, Store } from '@datorama/akita';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-export class TempState<TState> extends Query<TState> {
+export class TempStore<TState> extends Query<TState> {
   private readonly destroy$$ = new Subject<void>();
   private readonly streams = new Map<string, Observable<any>>();
-  readonly store: Store<TState>;
 
   constructor(name: string, initialState: TState) {
     super(
@@ -13,6 +12,10 @@ export class TempState<TState> extends Query<TState> {
     );
     this.store = this.__store__;
     this.initialilzeStreams(Object.keys(initialState));
+  }
+
+  get snapshot(): TState {
+    return this.store.getValue();
   }
 
   private initialilzeStreams(keys: string[]): void {
@@ -31,8 +34,12 @@ export class TempState<TState> extends Query<TState> {
     this.destroy$$.complete();
     this.store.destroy();
   }
+
+  update(newState: Partial<TState>): void {
+    this.store.update((state) => ({ ...state, ...newState }))
+  }
 }
 
-export function getTempState<T extends Record<string, any>>(name: string, initialState: T): TempState<T> {
-  return new TempState<T>(name, initialState);
+export function getTempStore<T extends Record<string, any>>(name: string, initialState: T): TempStore<T> {
+  return new TempStore<T>(name, initialState);
 }
