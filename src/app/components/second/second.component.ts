@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
-import { getTempStore } from 'src/app/state/temp-store';
-import { GlobalQuery } from 'src/app/state/global/global.query';
-import { GlobalService } from 'src/app/state/global/global.service';
+import { GlobalQuery } from '../../state/global/global.query';
+import { GlobalService } from '../../state/global/global.service';
+import { getTempStore } from '../../state/temp-store';
 
 @Component({
   selector: 'app-second-component',

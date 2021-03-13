@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { GlobalQuery } from 'src/app/state/global/global.query';
-import { GlobalService } from 'src/app/state/global/global.service';
+import { GlobalQuery } from '../../state/global/global.query';
+import { GlobalService } from '../../state/global/global.service';
 
 @Component({
   selector: 'app-first-component',
