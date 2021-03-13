@@ -1,18 +1,16 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
+import { environment } from '../environments/environment';
+import { AppRootComponent } from './app-root/app-root.component';
+import { EmptyComponent } from './components/empty/empty.component';
+import { FirstComponent } from './components/first/first.component';
+import { SecondComponent } from './components/second/second.component';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, environment.production ? [] : AkitaNgDevtools.forRoot({ name: 'routing manager' })],
+  declarations: [AppRootComponent, EmptyComponent, FirstComponent, SecondComponent],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppRootComponent],
 })
-export class AppModule { }
+export class AppModule {}
