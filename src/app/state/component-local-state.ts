@@ -1,7 +1,9 @@
 import { Query, Store } from '@datorama/akita';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 class ComponentLocalQuery<TState> extends Query<TState> {
+  private destroy$$ = new Subject<void>();
   private readonly streams = new Map<string, Observable<any>>();
 
   constructor(store: Store<TState>, initialState: TState) {
@@ -15,7 +17,12 @@ class ComponentLocalQuery<TState> extends Query<TState> {
   }
 
   get$(k: keyof TState): Observable<TState[keyof TState]> {
-    return this.streams.get(k as string);
+    return this.streams.get(k as string).pipe(takeUntil(this.destroy$$.asObservable()));
+  }
+
+  destroy(): void {
+    this.destroy$$.next();
+    this.destroy$$.complete();
   }
 }
 
@@ -30,6 +37,7 @@ export class ComponentLocalStore<T> {
 
   destroy(): void {
     this.store.destroy();
+    this.query.destroy();
   }
 }
 
