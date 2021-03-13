@@ -11,24 +11,8 @@ import { Component } from '@angular/core';
       </div>
       <div class="row">
         <div class="col-12">
-          <button
-            type="button"
-            class="btn mr-4"
-            [class.btn-outline-primary]="!showFirst"
-            [class.btn-primary]="showFirst"
-            (click)="show('first')"
-          >
-            first
-          </button>
-          <button
-            type="button"
-            class="btn mr-4"
-            [class.btn-outline-primary]="!showSecond"
-            [class.btn-primary]="showSecond"
-            (click)="show('second')"
-          >
-            second
-          </button>
+          <button type="button" class="btn btn-outline-primary mr-4" [class.active]="showFirst" (click)="show('first')">first</button>
+          <button type="button" class="btn btn-outline-primary mr-4" [class.active]="showSecond" (click)="show('second')">second</button>
           <button type="button" class="btn btn-outline-primary mr-4" (click)="show('both')">both</button>
           <button type="button" class="btn btn-outline-primary mr-4" (click)="show('none')">none</button>
         </div>
